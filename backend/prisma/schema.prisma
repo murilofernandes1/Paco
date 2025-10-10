@@ -15,18 +15,47 @@ model User {
   name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  orders Order[]
+  reviews Review[]
+  payments Payment[]
 }
 model Product {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   name      String 
+  price     Int 
   value     Int
-  quantity  Int?     @default(0)
-  orders    Order[]  
+  quantity  Int     @default(0)
+  orders    Order[]
+  reviews   Review[]
 }
 
 model Order {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   code       String
   product    Product  @relation(fields: [productId], references: [id])
-  productId  String   @db.ObjectId
+  productId   String   @db.ObjectId 
+  user User @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId 
+  payments Payment[]
+  review Review @relation(fields: [reviewId], references: [id])
+  reviewId String @db.ObjectId
+}
+
+model Review {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  content String
+  stars Int
+  user User @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId 
+  order Order[]
+  product    Product  @relation(fields: [productId], references: [id])
+  productId   String   @db.ObjectId 
+}
+
+model Payment {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  user User @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId 
+  order Order @relation(fields: [orderId], references: [id])
+  orderId String @db.ObjectId 
 }
