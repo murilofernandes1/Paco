@@ -7,26 +7,23 @@ const router = express.Router();
 
 router.post("/:productId/:userId", async (req, res) => {
   const { productId, userId } = req.params;
-  const { userChoice, number, adress } = req.body;
-  const paymentMethods = {
-    PIX: "Pix",
-    CARTAO_DE_CREDITO: "Cartão de Crédito",
-    BOLETO: "Boleto",
-  };
+  const { paymentMethod, number, adress } = req.body;
 
-  async function MethodChoosed(userChoice) {
-    let method;
-    if (userChoice === "Pix") {
-      method = paymentMethods.PIX;
-    } else if (userChoice === "Cartão de Crédito") {
-      method = paymentMethods.CARTAO_DE_CREDITO;
-    } else if (userChoice === "Boleto") {
-      method = paymentMethods.BOLETO;
-    } else {
-      throw new Error("Método inválido");
-    }
-  }
-  const method = MethodChoosed(userChoice);
+  const paymentMethods = {
+  PIX: "Pix",
+  CARTAO_DE_CREDITO: "Cartão de Crédito",
+  BOLETO: "Boleto",
+};
+
+const methodMap = {
+  pix: paymentMethods.PIX,
+  "cartão de crédito": paymentMethods.CARTAO_DE_CREDITO,
+  boleto: paymentMethods.BOLETO,
+};
+
+const method = methodMap[paymentMethod.toLowerCase().trim()];
+if (!method) throw new Error("Método inválido");
+
 
   try {
     const product = await prisma.product.findUnique({
@@ -46,8 +43,8 @@ router.post("/:productId/:userId", async (req, res) => {
         product: { connect: { id: productId } },
         user: { connect: { id: userId } },
         number: number,
-        adress: adress,
-        payments: method,
+        address: adress,
+        paymentMethod: method,
       },
     });
     res.status(200).json({ message: "Compra feita com sucesso!" });
