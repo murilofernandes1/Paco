@@ -13,6 +13,7 @@ model User {
   email     String   @unique
   password  String
   name      String
+  role String @default("USER")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   orders Order[]
@@ -23,8 +24,7 @@ model Product {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   name      String 
   price     Int 
-  value     Int
-  quantity  Int     @default(0)
+  quantity  Int     
   orders    Order[]
   reviews   Review[]
 }
