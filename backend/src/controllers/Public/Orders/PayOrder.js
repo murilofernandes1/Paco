@@ -6,6 +6,9 @@ const router = express.Router({ mergeParams: true });
 
 router.post("/", async (req, res) => {
   const orderId = req.params.id;
+  if (!orderId) {
+    res.status(404).json({ message: "Pedido não encontrado" });
+  }
   try {
     await prisma.order.update({
       where: { id: orderId },
