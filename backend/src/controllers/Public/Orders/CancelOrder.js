@@ -3,9 +3,9 @@ import pkg from "@prisma/client";
 
 const { PrismaClient } = pkg;
 const prisma = new PrismaClient();
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/", async (req, res) => {
   const orderId = req.params.id;
   if (!orderId) {
     res.status(404).json({ message: "Pedido não encontrado" });

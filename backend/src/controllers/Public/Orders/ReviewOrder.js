@@ -2,11 +2,11 @@ import express from "express";
 import pkg from "@prisma/client";
 const { PrismaClient } = pkg;
 const prisma = new PrismaClient();
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
-router.post("/:orderId/:userId", async (req, res) => {
-  const { orderId, userId } = req.params;
-
+router.post("/", async (req, res) => {
+  const { orderId } = req.params;
+  const userId = req.user.id;
   const userReview = req.body;
 
   const order = await prisma.order.findUnique({

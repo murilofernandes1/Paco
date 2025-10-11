@@ -3,7 +3,7 @@ import pkg from "@prisma/client";
 
 const { PrismaClient } = pkg;
 const prisma = new PrismaClient();
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 router.get("/", async (req, res) => {
   try {
@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/", async (req, res) => {
   const productId = req.params.id;
   if (!productId) {
     res.status(404).json({ message: "Produto não encontrado" });

@@ -2,7 +2,7 @@ import express from "express";
 import pkg from "@prisma/client";
 const { PrismaClient } = pkg;
 const prisma = new PrismaClient();
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 // ROTA PARA NOVOS PRODUTOS
 router.post("/", async (req, res) => {
@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
 });
 
 //ATUALIZAR UM PRODUTO
-router.put("/:id", async (req, res) => {
+router.put("/", async (req, res) => {
   const productId = req.params.id;
   if (!productId) {
     res.status(404).json({ message: "Produto não encontrado" });
@@ -62,7 +62,7 @@ router.put("/:id", async (req, res) => {
 
 //DELETAR UM PRODUTO
 
-router.delete("/:id", async (req, res) => {
+router.delete("/", async (req, res) => {
   const productId = req.params.id;
 
   try {

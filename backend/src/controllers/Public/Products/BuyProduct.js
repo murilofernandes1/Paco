@@ -3,27 +3,27 @@ import pkg from "@prisma/client";
 
 const { PrismaClient } = pkg;
 const prisma = new PrismaClient();
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
-router.post("/:productId/:userId", async (req, res) => {
-  const { productId, userId } = req.params;
+router.post("/", async (req, res) => {
+  const { productId } = req.params;
+  const userId = req.user.id;
   const { paymentMethod, number, adress } = req.body;
 
   const paymentMethods = {
-  PIX: "Pix",
-  CARTAO_DE_CREDITO: "Cartão de Crédito",
-  BOLETO: "Boleto",
-};
+    PIX: "Pix",
+    CARTAO_DE_CREDITO: "Cartão de Crédito",
+    BOLETO: "Boleto",
+  };
 
-const methodMap = {
-  pix: paymentMethods.PIX,
-  "cartão de crédito": paymentMethods.CARTAO_DE_CREDITO,
-  boleto: paymentMethods.BOLETO,
-};
+  const methodMap = {
+    pix: paymentMethods.PIX,
+    "cartão de crédito": paymentMethods.CARTAO_DE_CREDITO,
+    boleto: paymentMethods.BOLETO,
+  };
 
-const method = methodMap[paymentMethod.toLowerCase().trim()];
-if (!method) throw new Error("Método inválido");
-
+  const method = methodMap[paymentMethod.toLowerCase().trim()];
+  if (!method) throw new Error("Método inválido");
 
   try {
     const product = await prisma.product.findUnique({
