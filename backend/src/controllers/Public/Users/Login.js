@@ -2,8 +2,8 @@ import express from "express";
 import bcrypt from "bcrypt";
 import pkg from "@prisma/client";
 import jwt from "jsonwebtoken";
-const { PrismaClient } = pkg;
 
+const { PrismaClient } = pkg;
 const prisma = new PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET;
 const router = express.Router();
@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
       where: { email: userInfo.email },
     });
     if (!user) {
-      res.status(404).json({ message: "Usuário não encontrado" });
+      return res.status(404).json({ message: "Usuário não encontrado" });
     }
     //comparando a senha fornecida pelo usuário, com a que consta no db
     const isMatch = await bcrypt.compare(userInfo.password, user.password);
