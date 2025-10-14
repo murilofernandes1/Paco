@@ -1,0 +1,26 @@
+.card {
+  width: 200px;
+  height: 250px;
+  background-color: #edf7f6;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.product {
+  text-align: center;
+}
+.name {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.price {
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+.price span {
+  opacity: 0.5;
+  text-decoration: dashed line-through;
+}

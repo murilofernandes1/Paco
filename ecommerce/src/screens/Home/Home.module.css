@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+.principal {
+  margin-top: 10%;
+  margin-left: 100px;
+}
+.title {
+  font-size: 75px;
+  color: #edf7f6;
+  font-weight: 700;
+}
+.title span {
+  color: #d4dbda;
+  font-size: 40px;
+  vertical-align: super;
+}
+.subtitle {
+  font-size: 25px;
+  color: #edf7f6;
+  font-weight: 300;
+}

@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 75px;
+  margin-top: 50px;
+}
+.nav {
+  text-align: center;
+  padding-bottom: 10px;
+  width: 150px;
+  text-decoration: none;
+  color: #edf7f6;
+  font-weight: 300;
+  font-size: 15px;
+  border-bottom: #edf7f6 1px solid;
+}
+.nav:hover {
+  font-weight: 300;
+  color: #d4dbda;
+  border-bottom: #d4dbda 1px solid;
+}
