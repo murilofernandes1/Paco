@@ -2,24 +2,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
 }
-
 .form {
-  position: relative;
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 300px;
+  width: 500px;
   height: 350px;
   padding: 100px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
 }
-
 .inputcontainer {
-  margin-top: 10px;
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
