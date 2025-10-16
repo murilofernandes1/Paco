@@ -14,7 +14,9 @@ router.get("/", async (req, res) => {
     const user = await prisma.user.findUnique({
       where: { id: userId },
       include: {
-        orders: { include: { review: true }, include: { product: true } },
+        orders: {
+          include: { review: true, product: true },
+        },
       },
     });
     res.status(200).json(user);

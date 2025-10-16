@@ -5,8 +5,8 @@ const prisma = new PrismaClient();
 const router = express.Router({ mergeParams: true });
 
 router.post("/", async (req, res) => {
-  const { orderId } = req.params;
-  const userId = req.user.id;
+  const orderId = req.params.id;
+  const userId = req.userId;
   const userReview = req.body;
 
   const order = await prisma.order.findUnique({

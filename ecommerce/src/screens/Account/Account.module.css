@@ -99,3 +99,12 @@
   font-weight: 500;
   color: #008000;
 }
+.reviewresume {
+  font-weight: 600;
+  color: #1b2d2a;
+}
+.stars span {
+  color: gold;
+  font-size: 20px;
+  margin-right: 2px;
+}

@@ -10,11 +10,17 @@ type Product = {
 type Order = {
   number: string;
   id: string;
-  review: number;
+
   status: string;
   createdAt: string;
   address: string;
   product: Product;
+  review: Review;
+};
+
+type Review = {
+  id: string;
+  stars: number;
 };
 
 type User = {
@@ -35,6 +41,7 @@ export default function Account() {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
+        console.log(response.data);
         setOrders(response.data.orders || []);
       } catch (error) {
         console.error(error);
@@ -90,8 +97,18 @@ export default function Account() {
                 <div>
                   <span className={styles.status}>Status: </span>
                   <span className={styles.payed}>Pedido pago</span>
-                  {o.review > 0 ? (
-                    <span> - Avaliação: {o.review}</span>
+                  {o.review ? (
+                    <span key={o.review.id}>
+                      {" "}
+                      <span className={styles.reviewresume}>
+                        - Avaliação:
+                      </span>{" "}
+                      <span className={styles.stars}>
+                        {[...Array(5)].map((_, i) => (
+                          <span key={i}>{i < o.review.stars ? "★" : "☆"}</span>
+                        ))}
+                      </span>
+                    </span>
                   ) : (
                     <div className={styles.review}>
                       <button>
