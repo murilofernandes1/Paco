@@ -9,7 +9,8 @@ type Product = {
   id: string;
   name: string;
   price: number;
-  imageUrl?: string;
+  image?: string;
+  sale: number;
 };
 
 export default function Card() {
@@ -43,14 +44,21 @@ export default function Card() {
         >
           <div className={styles.imageContainer}>
             <img
-              src={p.imageUrl || "/placeholder.png"}
+              src={p.image || "/placeholder.png"}
               alt={p.name}
               className={styles.image}
             />
           </div>
           <div className={styles.productInfo}>
             <p className={styles.name}>{p.name}</p>
-            <p className={styles.price}>{formatBRL(p.price)}</p>
+            {p.sale == null ? (
+              <p className={styles.price}>{formatBRL(p.price)}</p>
+            ) : (
+              <p className={styles.sale}>
+                {formatBRL(p.sale)}{" "}
+                <span className={styles.oldprice}>{formatBRL(p.price)}</span>
+              </p>
+            )}
           </div>
         </div>
       ))}

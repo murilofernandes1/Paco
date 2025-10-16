@@ -64,7 +64,6 @@ export default function Account() {
         {orders.length > 0 ? (
           orders.map((o) => (
             <div className={styles.order} key={o.id}>
-              <span className={styles.product}>{o.product.name}</span>
               <p>
                 Código do pedido: <span>{o.number}</span>
               </p>

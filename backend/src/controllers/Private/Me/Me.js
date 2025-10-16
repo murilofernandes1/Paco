@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
       where: { id: userId },
       include: {
         orders: {
-          include: { review: true, product: true },
+          include: { review: true },
         },
       },
     });
@@ -24,6 +24,7 @@ router.get("/", async (req, res) => {
     res
       .status(500)
       .json({ message: "Não foi possível encontrar o usuário", error });
+    console.log(error);
   }
 });
 export default router;

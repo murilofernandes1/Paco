@@ -6,14 +6,15 @@ const router = express.Router({ mergeParams: true });
 
 // ROTA PARA NOVOS PRODUTOS
 router.post("/", async (req, res) => {
-  const { name, price, quantity } = req.body;
+  const { name, price, description, image } = req.body;
 
   try {
     await prisma.product.create({
       data: {
         name: name,
         price: price,
-        quantity: quantity,
+        description: description,
+        image: image,
       },
     });
     if (!name) {
@@ -22,11 +23,8 @@ router.post("/", async (req, res) => {
     if (!price) {
       res.status(500).json({ message: "Preço inválido" });
     }
-    if (!quantity) {
-      res.status(500).json({ message: "Quantidade inválida" });
-    }
     res.status(201).json({
-      message: `O produto: ${name}, de valor: ${price} e ${quantity} quantidades foi adicionado com sucesso!`,
+      message: `O produto: ${name}, de valor: ${price} foi adicionado com sucesso!`,
     });
   } catch (error) {
     res
