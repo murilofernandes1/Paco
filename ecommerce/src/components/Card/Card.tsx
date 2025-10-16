@@ -2,15 +2,18 @@ import api from "../../services/api";
 import styles from "./Card.module.css";
 import Spinner from "../Spinner/Spinner";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { formatBRL } from "../../utils/BRLConvert";
 
 type Product = {
   id: string;
   name: string;
   price: number;
-  imageUrl?: string; // caso venha do backend
+  imageUrl?: string;
 };
 
 export default function Card() {
+  const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setIsLoading] = useState(true);
 
@@ -33,7 +36,11 @@ export default function Card() {
   return (
     <div className={styles.container}>
       {products.map((p) => (
-        <div key={p.id} className={styles.card}>
+        <div
+          onClick={() => navigate(`/product/${p.id}`)}
+          key={p.id}
+          className={styles.card}
+        >
           <div className={styles.imageContainer}>
             <img
               src={p.imageUrl || "/placeholder.png"}
@@ -43,7 +50,7 @@ export default function Card() {
           </div>
           <div className={styles.productInfo}>
             <p className={styles.name}>{p.name}</p>
-            <p className={styles.price}>R$ {p.price}</p>
+            <p className={styles.price}>{formatBRL(p.price)}</p>
           </div>
         </div>
       ))}

@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 50px 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 850px;
+  height: 500px;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.info {
+  align-self: center;
+  margin-left: 100px;
+}
+.name {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #1b2d2a;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: bold;
+  color: #1b2d2a;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+}
+.image {
+  width: 50%;
+  height: 450px;
+  background-color: #dfe8e7;
+  align-self: center;
+  border-radius: 10px;
+}
+.color input[type="radio"] {
+  display: none;
+}
+
+.color label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+
+  user-select: none;
+}
+
+/* Quadrado */
+.color label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.color input[type="radio"]:checked + label::before {
+  background-color: #007700;
+  border-color: #007700;
+}
