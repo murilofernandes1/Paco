@@ -2,13 +2,14 @@ import express from "express";
 import auth from "../middleware/auth.js";
 import ManageProducts from "../controllers/Admin/Products/ManageProducts.js";
 import Products from "../controllers/Public/Products/Products.js";
-import BuyProducts from "../controllers/Public/Products/BuyProduct.js";
+import BuyProducts from "../controllers/Private/Buy/BuyProduct.js";
 
 const router = express.Router();
 
 //ADMINSTRAR PRODUTOS
 router.use("/:id/manage", ManageProducts);
 router.use("/:id/manage", ManageProducts);
+router.use("/manage", ManageProducts);
 
 //VER PRODUTOS
 router.use("/", Products);

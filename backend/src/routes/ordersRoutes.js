@@ -1,15 +1,15 @@
 import express from "express";
 import auth from "../middleware/auth.js";
-import CancelPurchase from "../controllers/Public/Orders/CancelOrder.js";
-import ReviewProduct from "../controllers/Public/Orders/ReviewOrder.js";
-import PayOrder from "../controllers/Public/Orders/PayOrder.js";
+import CancelOrder from "../controllers/Private/Orders/CancelOrder.js";
+import ReviewProduct from "../controllers/Private/Orders/ReviewOrder.js";
+import PayOrder from "../controllers/Private/Orders/PayOrder.js";
 const router = express.Router();
 
 //PAGAR PEDIDO
 router.use("/:id/pay", auth, PayOrder);
 
 //CANCELAR COMPRA
-router.use("/:id/cancel", auth, CancelPurchase);
+router.use("/:id/cancel", auth, CancelOrder);
 
 //AVALIAR PEDIDO
 router.use("/:id/review", auth, ReviewProduct);

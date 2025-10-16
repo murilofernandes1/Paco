@@ -18,8 +18,8 @@ export default function Login() {
         email: email,
         password: password,
       });
+
       localStorage.setItem("token", token);
-      alert("Usuário logado com sucesso");
       navigate("/");
     } catch (error) {
       setIsLoading(false);

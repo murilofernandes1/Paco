@@ -7,9 +7,6 @@ export default function Catalogo() {
       <NavProducts />
       <div className={styles.container}>
         <Card />
-        <Card />
-        <Card />
-        <Card />
       </div>
     </>
   );

@@ -13,7 +13,7 @@ export default function Header() {
         <Link className={styles.nav} to={"/"}>
           Carrinho
         </Link>
-        <Link className={styles.nav} to={"/"}>
+        <Link className={styles.nav} to={"/account"}>
           Minha conta
         </Link>
       </header>

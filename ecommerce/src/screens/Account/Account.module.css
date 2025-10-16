@@ -1,0 +1,101 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.ordersContainer {
+  width: 50%;
+  margin-top: 20px;
+}
+
+.order {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #edf7f6;
+}
+
+.order p {
+  color: #1b2d2a;
+  font-weight: 500;
+  margin: 5px 0;
+}
+
+.order p span {
+  font-weight: bold;
+}
+
+.product {
+  color: #1b2d2a;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.pay {
+  margin-top: 10px;
+  background-color: #ffdddd;
+  padding: 10px;
+  border: 1px solid #ff5c5c;
+  border-radius: 5px;
+}
+
+.pay:hover {
+  background-color: #ffcccc;
+  cursor: pointer;
+}
+
+.pay span {
+  color: #b30000;
+  font-weight: bold;
+}
+
+.pay button {
+  background: none;
+  border: none;
+  color: #b30000;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.review {
+  margin-top: 10px;
+  background-color: #fff3b0;
+  padding: 10px;
+  border: 1px solid #ffd700;
+  border-radius: 5px;
+}
+
+.review:hover {
+  background-color: #ffec7f;
+  cursor: pointer;
+}
+
+.review span {
+  color: #b38600;
+  font-weight: bold;
+}
+
+.review button {
+  background: none;
+  border: none;
+  color: #b38600;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.status {
+  font-weight: 500;
+  color: #1b2d2a;
+}
+.pending {
+  font-weight: 500;
+  color: #b30000;
+}
+.payed {
+  font-weight: 500;
+  color: #008000;
+}

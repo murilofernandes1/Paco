@@ -4,6 +4,8 @@ import Catalogo from "../screens/Catalogo/Catalogo";
 import Login from "../screens/Auth/Login/Login";
 import Register from "../screens/Auth/Register/Register";
 import PublicRoutes from "./PublicRoutes";
+import AuthenticatedRoutes from "./AuthenticatedRoutes";
+import Account from "../screens/Account/Account";
 
 export default function AppNavigator() {
   return (
@@ -14,6 +16,9 @@ export default function AppNavigator() {
           <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+        </Route>
+        <Route element={<AuthenticatedRoutes />}>
+          <Route path="/account" element={<Account />} />
         </Route>
       </Routes>
     </>

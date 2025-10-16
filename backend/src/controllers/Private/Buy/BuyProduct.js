@@ -6,9 +6,9 @@ const prisma = new PrismaClient();
 const router = express.Router({ mergeParams: true });
 
 router.post("/", async (req, res) => {
-  const { productId } = req.params;
-  const userId = req.user.id;
-  const { paymentMethod, number, adress } = req.body;
+  const productId = req.params.id;
+  const userId = req.userId;
+  const { paymentMethod, number, address } = req.body;
 
   const paymentMethods = {
     PIX: "Pix",
@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
         product: { connect: { id: productId } },
         user: { connect: { id: userId } },
         number: number,
-        address: adress,
+        address: address,
         paymentMethod: method,
       },
     });
