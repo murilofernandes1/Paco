@@ -5,7 +5,6 @@ import Products from "../controllers/Public/Products/Products.js";
 import SeeProduct from "../controllers/Public/Products/SeeProduct.js";
 import BuyProducts from "../controllers/Private/Buy/BuyProduct.js";
 import Sale from "../controllers/Admin/Products/Sale.js";
-4;
 import Stock from "../controllers/Admin/Products/Stock.js";
 
 const router = express.Router();
@@ -26,5 +25,7 @@ router.use("/:id", SeeProduct);
 
 //COMPRAR PRODUTOS
 router.use("/:id/buy", auth, BuyProducts);
+
+//VER REVIEWS
 
 export default router;

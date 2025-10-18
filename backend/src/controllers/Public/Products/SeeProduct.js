@@ -13,11 +13,12 @@ router.get("/", async (req, res) => {
   try {
     const selectedProduct = await prisma.product.findUnique({
       where: { id: productId },
-      include: { stock: true },
+      include: { stock: true, reviews: true },
     });
-    res.status(200).json({ message: "Produto selecionado:", selectedProduct });
+    res.status(200).json({ selectedProduct });
   } catch (error) {
     res.status(500).json({ message: "Não foi possivel mostrar o produto" });
+    console.log(error);
   }
 });
 export default router;

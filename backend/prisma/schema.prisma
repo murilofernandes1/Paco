@@ -42,32 +42,34 @@ model Stock {
 }
 
 model Order {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  number       String
-  address String 
-  paymentMethod String 
-  product    Product  @relation(fields: [productId], references: [id])
-  productId   String   @db.ObjectId 
-  user User @relation(fields: [userId], references: [id])
-  userId String @db.ObjectId 
-  payments Payment[]
-  review Review? @relation(fields: [reviewId], references: [id])
-  reviewId String? @db.ObjectId
-  status String @default("Pending")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  number        String
+  address       String
+  paymentMethod String
+  product       Product  @relation(fields: [productId], references: [id])
+  productId     String   @db.ObjectId
+  user          User     @relation(fields: [userId], references: [id])
+  userId        String   @db.ObjectId
+  payments      Payment[]
+  review        Review? 
+  status        String   @default("Pending")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
+
 
 model Review {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  content String
-  stars Int
-  user User @relation(fields: [userId], references: [id])
-  userId String @db.ObjectId 
-  order Order[]
+  content    String
+  stars      Int
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String   @db.ObjectId
+  order      Order    @relation(fields: [orderId], references: [id])
+  orderId    String @unique  @db.ObjectId  
   product    Product  @relation(fields: [productId], references: [id])
-  productId   String   @db.ObjectId 
+  productId  String   @db.ObjectId
 }
+
 
 model Payment {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId

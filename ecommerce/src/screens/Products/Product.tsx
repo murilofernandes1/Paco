@@ -17,6 +17,10 @@ type Product = {
   price: number;
   sale: number | null;
   image: string;
+  description: string;
+};
+type Review = {
+  length: number;
 };
 
 export default function Product() {
@@ -29,8 +33,10 @@ export default function Product() {
     price: 0,
     sale: null,
     image: "",
+    description: "",
   });
   const [stock, setStock] = useState<Stock[]>([]);
+  const [review, setReview] = useState<Review[]>([]);
 
   useEffect(() => {
     async function LoadProduct() {
@@ -38,8 +44,10 @@ export default function Product() {
         const response = await api.get(`/products/${id}`);
         setProduct(response.data.selectedProduct);
         setStock(response.data.selectedProduct.stock);
+        setReview(response.data.selectedProduct.reviews);
         console.log(response.data.selectedProduct.stock);
         console.log(response.data.selectedProduct);
+        console.log(response.data.selectedProduct.reviews);
       } catch (error) {
         console.error("Erro ao carregar produto:", error);
       } finally {
@@ -74,7 +82,15 @@ export default function Product() {
                   </span>
                 )}
               </div>
-
+              <span className={styles.stars}>
+                {[...Array(5)].map((_, i) => (
+                  <span key={i}>
+                    {i < review.length + review.length / review.length
+                      ? "★"
+                      : "☆"}
+                  </span>
+                ))}
+              </span>
               {stock.length === 0 ? (
                 <h1>Sem estoque</h1>
               ) : (
