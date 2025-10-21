@@ -1,0 +1,61 @@
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 9999;
+  width: 450px;
+  height: 30vh;
+  border-radius: 10px;
+  background-color: #edf7f6;
+  color: black;
+  padding: 50px 20px 75px;
+}
+
+.container h1 {
+  color: #145243;
+}
+.container p {
+  color: #145243;
+  font-size: 25px;
+}
+.container button {
+  margin-top: 25px;
+}
+.container span {
+  font-weight: 800;
+}
+.close {
+  position: absolute;
+  top: -20px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.copy {
+  background-color: #edf7f6;
+  border-width: 1px;
+  border-color: #145243;
+  padding: 15px 25px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copy p {
+  font-size: 15px;
+  color: #145243;
+  margin: 0;
+}
+
+.copy:hover p {
+  color: #edf7f6;
+}

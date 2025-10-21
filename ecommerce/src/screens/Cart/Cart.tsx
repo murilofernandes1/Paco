@@ -31,9 +31,9 @@ export default function Cart() {
                   <p>Tamanho: {item.size}</p>
                   <p>Quantidade: {item.quantity}</p>
                   <p>Preço: {formatBRL(item.price)}</p>
-                  <div className={styles.buttons}>
+                  <div className={styles.Cartbuttons}>
                     <button
-                      className={styles.button}
+                      className={styles.removeItem}
                       onClick={() =>
                         removeFromCart(item.id, item.color, item.size)
                       }
@@ -46,18 +46,21 @@ export default function Cart() {
             ))}
           </div>
 
-          <div className={styles.totalContainer}>Total: {formatBRL(total)}</div>
-
-          <div className={styles.buttons}>
-            <button className={styles.button} onClick={clearCart}>
-              Limpar Carrinho
-            </button>
-            <button
-              className={styles.button}
-              onClick={() => navigate("/checkout")}
-            >
-              Finalizar Compra
-            </button>
+          <div className={styles.purchaseResume}>
+            <div className={styles.totalContainer}>
+              Total do carrinho: {formatBRL(total)}
+            </div>
+            <div className={styles.buttons}>
+              <button className={styles.button} onClick={clearCart}>
+                Limpar Carrinho
+              </button>
+              <button
+                className={styles.button}
+                onClick={() => navigate("/checkout")}
+              >
+                Finalizar Compra
+              </button>
+            </div>
           </div>
         </>
       )}
