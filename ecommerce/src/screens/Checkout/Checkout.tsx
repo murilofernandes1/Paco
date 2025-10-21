@@ -16,8 +16,12 @@ export default function Checkout() {
     cvv: "",
     installments: "1",
   });
+  const [coupon, setCoupon] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [couponError, setCouponError] = useState(false);
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const totalWithDiscount = total - discount;
 
   const paymentOptions = [
     { id: "credit", label: "Cartão de Crédito", icon: <FaCreditCard /> },
@@ -40,7 +44,9 @@ export default function Checkout() {
     }
 
     alert(
-      `Compra finalizada com sucesso!\nForma de pagamento: ${paymentMethod}`
+      `Compra finalizada com sucesso!\nForma de pagamento: ${paymentMethod}\nValor final: ${formatBRL(
+        totalWithDiscount
+      )}`
     );
     clearCart();
     navigate("/");
@@ -52,6 +58,16 @@ export default function Checkout() {
     setCardData({ ...cardData, [e.target.name]: e.target.value });
   }
 
+  function applyCoupon() {
+    if (coupon.trim().toUpperCase() === "PACO20") {
+      setDiscount(total * 0.2);
+      setCouponError(false);
+    } else {
+      setDiscount(0);
+      setCouponError(true);
+    }
+  }
+  const couponDiscount = discount;
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Checkout</h1>
@@ -85,9 +101,35 @@ export default function Checkout() {
           <div className={styles.summary}>
             <div className={styles.totalContainer}>
               <span>Total:</span>
-              <span>{formatBRL(total)}</span>
+              <div className={styles.totalValues}>
+                <span>{formatBRL(totalWithDiscount)}</span>
+                {discount ? (
+                  <span className={styles.newDiscount}>
+                    -{formatBRL(couponDiscount)}
+                  </span>
+                ) : (
+                  <div />
+                )}
+              </div>
             </div>
 
+            <div className={styles.coupon}>
+              <span>Tem um cupom?</span>
+              <input
+                type="text"
+                placeholder="Digite seu cupom"
+                value={coupon}
+                onChange={(e) => setCoupon(e.target.value)}
+              />
+              <button type="button" onClick={applyCoupon}>
+                Aplicar
+              </button>
+            </div>
+            {couponError === true ? (
+              <p className={styles.couponError}>Cupom inválido!</p>
+            ) : (
+              <div />
+            )}
             <div className={styles.payment}>
               <h2>Escolha a forma de pagamento</h2>
               <div className={styles.paymentOptions}>
@@ -149,7 +191,7 @@ export default function Checkout() {
                   >
                     {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
                       <option key={n} value={n}>
-                        {n}x de {formatBRL(total / n)}
+                        {n}x de {formatBRL(totalWithDiscount / n)}
                       </option>
                     ))}
                   </select>
