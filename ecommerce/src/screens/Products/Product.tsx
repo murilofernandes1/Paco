@@ -4,7 +4,7 @@ import { formatBRL } from "../../utils/BRLConvert";
 import Spinner from "../../components/Spinner/Spinner";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../contexts/CartContext";
 
 type Stock = {
   id: string;
@@ -22,6 +22,12 @@ type Product = {
 };
 type Review = {
   length: number;
+  name: string;
+  stars: number;
+  content: string;
+  user: {
+    name: string;
+  };
 };
 
 export default function Product() {
@@ -64,6 +70,7 @@ export default function Product() {
   });
   const [stock, setStock] = useState<Stock[]>([]);
   const [review, setReview] = useState<Review[]>([]);
+  const [showReviews, setShowReviews] = useState(false);
 
   useEffect(() => {
     async function LoadProduct() {
@@ -118,6 +125,48 @@ export default function Product() {
                   </span>
                 ))}
               </span>
+              <div className={styles.reviewSection}>
+                <button
+                  className={styles.reviewButton}
+                  onClick={() => setShowReviews(true)}
+                >
+                  Ver avaliações ({review.length})
+                </button>
+
+                {showReviews && (
+                  <div className={styles.reviewOverlay}>
+                    <div className={styles.reviewModal}>
+                      <button
+                        className={styles.closeButton}
+                        onClick={() => setShowReviews(false)}
+                      >
+                        ✕
+                      </button>
+                      <h2>Avaliações do produto</h2>
+
+                      {review.length === 0 ? (
+                        <p className={styles.noReviews}>
+                          Ainda não há avaliações.
+                        </p>
+                      ) : (
+                        <div className={styles.reviewList}>
+                          {review.map((r, index) => (
+                            <div key={index} className={styles.reviewItem}>
+                              <div className={styles.reviewHeader}>
+                                <strong>
+                                  {r.user.name || "Usuário Anônimo"}
+                                </strong>
+                                <span>{"★".repeat(r.stars || 5)}</span>
+                              </div>
+                              <p>{r.content || "Sem comentário"}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
               {stock.length === 0 ? (
                 <h1>Sem estoque</h1>
               ) : (

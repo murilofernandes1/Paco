@@ -13,7 +13,10 @@ router.get("/", async (req, res) => {
   try {
     const selectedProduct = await prisma.product.findUnique({
       where: { id: productId },
-      include: { stock: true, reviews: true },
+      include: {
+        stock: true,
+        reviews: { include: { user: { select: { id: true, name: true } } } },
+      },
     });
     res.status(200).json({ selectedProduct });
   } catch (error) {

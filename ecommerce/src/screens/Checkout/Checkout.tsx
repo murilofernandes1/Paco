@@ -1,4 +1,4 @@
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../contexts/CartContext";
 import { formatBRL } from "../../utils/BRLConvert";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";

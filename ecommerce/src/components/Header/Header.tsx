@@ -1,6 +1,6 @@
 import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../contexts/CartContext";
 export default function Header() {
   const { cart } = useCart();
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
