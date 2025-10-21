@@ -3,7 +3,8 @@ import api from "../../services/api";
 import { formatBRL } from "../../utils/BRLConvert";
 import Spinner from "../../components/Spinner/Spinner";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 
 type Stock = {
   id: string;
@@ -24,8 +25,34 @@ type Review = {
 };
 
 export default function Product() {
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
+  const [size, setSize] = useState("");
+  const [color, setColor] = useState("");
   const { id } = useParams<{ id: string }>();
+  function handleAddToCart() {
+    if (!color || !size) {
+      alert("Escolha uma cor e um tamanho");
+      return;
+    }
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.sale || product.price,
+      image: product.image,
+      color,
+      size,
+    });
 
+    alert("Produto adicionado ao carrinho!");
+  }
+  function buyNow() {
+    if (!color || !size) {
+      alert("Escolha uma cor e um tamanho antes de continuar");
+      return;
+    }
+    navigate("/checkout");
+  }
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState<Product>({
     id: "",
@@ -104,6 +131,9 @@ export default function Product() {
                           name="color"
                           value={s.color}
                           defaultChecked={stock.length === 1}
+                          checked={color === s.color}
+                          onChange={(e) => setColor(e.target.value)}
+                          required
                         />
                         <span
                           className={styles.colorCircle}
@@ -125,10 +155,17 @@ export default function Product() {
                       name="size"
                       value={s.size}
                       defaultChecked={stock.length === 1}
+                      checked={size === s.size}
+                      onChange={(e) => setSize(e.target.value)}
+                      required
                     />
                     <span className={styles.sizeSquare}>{s.size}</span>
                   </label>
                 ))}
+              </div>
+              <div className={styles.buttonContainer}>
+                <button onClick={buyNow}>Comprar Agora</button>
+                <button onClick={handleAddToCart}>Adicionar ao Carrinho</button>
               </div>
             </div>
           </div>

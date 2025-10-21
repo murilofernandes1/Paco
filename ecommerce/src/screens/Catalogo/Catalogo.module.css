@@ -1,7 +1,23 @@
-.container {
+.catalogoContainer {
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  gap: 75px;
-  margin-top: 120px;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cardsContainer {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .catalogoContainer {
+    flex-direction: column;
+    padding: 10px;
+  }
 }

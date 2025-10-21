@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   padding: 50px 20px;
+  box-sizing: border-box;
 }
 
 .card {
@@ -10,29 +11,41 @@
   background-color: #fff;
   padding: 30px;
   border-radius: 15px;
-  max-width: 850px;
-  height: 500px;
+  max-width: 900px;
   width: 100%;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  gap: 40px;
+  flex-wrap: wrap;
 }
 
 .image {
-  width: 50%;
+  flex: 1 1 300px;
   height: 450px;
   background-color: #dfe8e7;
-  align-self: center;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 10px;
 }
 
 .info {
-  align-self: top;
-  margin-left: 100px;
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .name {
   font-size: 28px;
   font-weight: bold;
-  margin-bottom: 15px;
   color: #1b2d2a;
 }
 
@@ -40,23 +53,23 @@
   font-size: 22px;
   font-weight: bold;
   color: #1b2d2a;
-  margin-bottom: 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
 }
 
 .oldprice {
-  text-decoration-line: line-through;
+  text-decoration: line-through;
   opacity: 0.6;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 500;
   color: #1b2d2a;
-  margin-top: 4px;
 }
 
 .sale {
   font-size: 22px;
   font-weight: 500;
   color: #1b2d2a;
-  margin-top: 4px;
 }
 
 .description {
@@ -66,22 +79,22 @@
 }
 
 .color {
-  padding-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 20px;
 }
 
 .head {
-  font-size: 1.5rem;
+  font-size: 18px;
   font-weight: 600;
   color: #1b2d2a;
+  margin-bottom: 8px;
 }
 
 .colorOptionsRow {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .colorOption {
@@ -96,36 +109,34 @@
 }
 
 .colorCircle {
-  width: 30px;
-  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border: 2px solid #333;
   border-radius: 5px;
-  border: 1px solid #1b2d2a;
-  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1b2d2a;
   transition: 0.2s ease;
 }
 
 .colorOption input:checked + .colorCircle {
   border-color: #1b2d2a;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
-.colorName {
-  font-size: 14px;
-  margin-top: 5px;
-  text-align: center;
-}
-
-.head {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: #1b2d2a;
+.sizeContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .sizeOption {
   display: flex;
   align-items: center;
-  margin-right: 10px;
   cursor: pointer;
 }
 
@@ -137,31 +148,68 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   border: 2px solid #333;
   border-radius: 5px;
   font-size: 14px;
   font-weight: 500;
-  transition: 0.2s ease;
   color: #1b2d2a;
+  transition: 0.2s ease;
 }
 
 .sizeOption input:checked + .sizeSquare {
-  border-color: #1b2d2a;
   background-color: #1b2d2a;
   color: #fff;
   transform: scale(1.05);
+  border-color: #1b2d2a;
 }
 
-.sizeContainer {
+.stars {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
+  gap: 4px;
+  margin-bottom: 10px;
 }
+
 .stars span {
+  font-size: 28px;
   color: #1b2d2a;
-  font-size: 30px;
-  margin-right: 2px;
+}
+.buttonContainer {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+button {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #145243;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  align-self: flex-start;
+}
+
+button:hover {
+  background-color: #1b2d2a;
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    padding: 20px;
+    height: auto;
+  }
+
+  .image,
+  .info {
+    width: 100%;
+  }
+
+  .info {
+    margin-left: 0;
+  }
 }

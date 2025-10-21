@@ -3,30 +3,18 @@ import Spinner from "../../components/Spinner/Spinner";
 import { useEffect, useState } from "react";
 import styles from "./Account.module.css";
 
-type Product = {
-  name: string;
-};
-
+type Product = { name: string };
+type Review = { id: string; stars: number };
 type Order = {
-  number: string;
   id: string;
-
+  number: string;
   status: string;
   createdAt: string;
   address: string;
   product: Product;
-  review: Review;
+  review: Review | null;
 };
-
-type Review = {
-  id: string;
-  stars: number;
-};
-
-type User = {
-  name: string;
-  orders: Order[];
-};
+type User = { name: string; orders: Order[] };
 
 export default function Account() {
   const [loading, setLoading] = useState(true);
@@ -41,7 +29,6 @@ export default function Account() {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
-        console.log(response.data);
         setOrders(response.data.orders || []);
       } catch (error) {
         console.error(error);
@@ -56,73 +43,64 @@ export default function Account() {
 
   return (
     <div className={styles.container}>
-      <h1>
-        Olá, <span>{user?.name}</span>
+      <h1 className={styles.ola}>
+        Olá, <span>{user?.name}!</span>
       </h1>
       <h2>Minhas compras</h2>
-      <div className={styles.ordersContainer}>
-        {orders.length > 0 ? (
-          orders.map((o) => (
-            <div className={styles.order} key={o.id}>
-              <p>
-                Código do pedido: <span>{o.number}</span>
-              </p>
-              <p>
-                Endereço de entrega: <span>{o.address}</span>
-              </p>
-              <p>
-                Pedido feito em:{" "}
-                <span>
-                  {new Date(o.createdAt).toLocaleDateString("pt-BR", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                  })}
-                </span>
-              </p>
-              {o.status === "Pending" ? (
-                <div>
-                  <span className={styles.status}>
-                    Status:{" "}
-                    <span className={styles.pending}>Pagamento pendente</span>
+
+      {orders.length === 0 ? (
+        <p>Sem pedidos</p>
+      ) : (
+        <div className={styles.ordersContainer}>
+          {orders.map((o) => (
+            <div className={styles.orderCard} key={o.id}>
+              <div className={styles.orderHeader}>
+                <p>
+                  Código do pedido: <span>{o.number}</span>
+                </p>
+                <p>
+                  Data da compra:{" "}
+                  <span>
+                    {new Date(o.createdAt).toLocaleDateString("pt-BR")}
                   </span>
-                  <div className={styles.pay}>
-                    <button>
-                      <span>Pagar pedido agora</span>
-                    </button>
+                </p>
+                <p>
+                  Endereço de entrega: <span>{o.address}</span>
+                </p>
+              </div>
+
+              <div className={styles.statusSection}>
+                {o.status === "Pending" ? (
+                  <div className={styles.pendingSection}>
+                    <span className={styles.pending}>Pagamento pendente</span>
+                    <button className={styles.payBtn}>Pagar agora</button>
                   </div>
-                </div>
-              ) : (
-                <div>
-                  <span className={styles.status}>Status: </span>
-                  <span className={styles.payed}>Pedido pago</span>
-                  {o.review ? (
-                    <span key={o.review.id}>
-                      {" "}
-                      <span className={styles.reviewresume}>
-                        - Avaliação:
-                      </span>{" "}
-                      <span className={styles.stars}>
-                        {[...Array(5)].map((_, i) => (
-                          <span key={i}>{i < o.review.stars ? "★" : "☆"}</span>
-                        ))}
-                      </span>
-                    </span>
-                  ) : (
-                    <div className={styles.review}>
-                      <button>
-                        <span>Avaliar agora</span>
+                ) : (
+                  <div className={styles.payedSection}>
+                    <span className={styles.payed}>Pedido pago</span>
+                    {o.review ? (
+                      <div className={styles.reviewResume}>
+                        Minha avaliação:{" "}
+                        <span className={styles.stars}>
+                          {[...Array(5)].map((_, i) => (
+                            <span key={i}>
+                              {i < o.review!.stars ? "★" : "☆"}
+                            </span>
+                          ))}
+                        </span>
+                      </div>
+                    ) : (
+                      <button className={styles.reviewBtn}>
+                        Avaliar agora
                       </button>
-                    </div>
-                  )}
-                </div>
-              )}
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
-          ))
-        ) : (
-          <p>Sem pedidos</p>
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

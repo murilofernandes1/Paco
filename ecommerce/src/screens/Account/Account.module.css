@@ -2,109 +2,106 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 50px;
+  padding: 50px 20px;
+}
+
+.ola {
+  font-size: 32px;
+  font-weight: 700;
+  color: #d4dbda;
+}
+
+.ola span {
+  color: #d4dbda;
+}
+
+h2 {
+  font-size: 24px;
+  margin-top: 10px;
+  color: #d4dbda;
 }
 
 .ordersContainer {
-  width: 50%;
-  margin-top: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.order {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 15px;
-  margin-bottom: 15px;
+.orderCard {
   background-color: #edf7f6;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.order p {
+.orderHeader p {
+  margin: 0;
   color: #1b2d2a;
   font-weight: 500;
-  margin: 5px 0;
 }
 
-.order p span {
-  font-weight: bold;
+.orderHeader span {
+  font-weight: 700;
+}
+.orderHeader p {
+  margin-top: 5px;
+}
+.statusSection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
 }
 
-.product {
-  color: #1b2d2a;
-  font-weight: bold;
-  font-size: 1.2rem;
+.pendingSection,
+.payedSection {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-.pay {
-  margin-top: 10px;
+.pending {
+  color: #b30000;
+  font-weight: 600;
+}
+
+.payed {
+  color: #008000;
+  font-weight: 600;
+}
+
+.payBtn,
+.reviewBtn {
   background-color: #ffdddd;
-  padding: 10px;
   border: 1px solid #ff5c5c;
   border-radius: 5px;
-}
-
-.pay:hover {
-  background-color: #ffcccc;
-  cursor: pointer;
-}
-
-.pay span {
-  color: #b30000;
-  font-weight: bold;
-}
-
-.pay button {
-  background: none;
-  border: none;
-  color: #b30000;
-  font-weight: bold;
-  font-size: 1.1rem;
-  cursor: pointer;
-}
-
-.review {
-  margin-top: 10px;
-  background-color: #fff3b0;
-  padding: 10px;
-  border: 1px solid #ffd700;
-  border-radius: 5px;
-}
-
-.review:hover {
-  background-color: #ffec7f;
-  cursor: pointer;
-}
-
-.review span {
-  color: #b38600;
-  font-weight: bold;
-}
-
-.review button {
-  background: none;
-  border: none;
-  color: #b38600;
-  font-weight: bold;
-  font-size: 1.1rem;
-  cursor: pointer;
-}
-.status {
-  font-weight: 500;
-  color: #1b2d2a;
-}
-.pending {
-  font-weight: 500;
-  color: #b30000;
-}
-.payed {
-  font-weight: 500;
-  color: #008000;
-}
-.reviewresume {
+  padding: 8px 12px;
   font-weight: 600;
-  color: #1b2d2a;
+  cursor: pointer;
+  transition: 0.2s;
 }
+
+.payBtn:hover,
+.reviewBtn:hover {
+  background-color: #ffcccc;
+}
+
+.reviewResume {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #1b2d2a;
+  font-weight: 500;
+}
+
 .stars span {
   color: #1b2d2a;
-  font-size: 20px;
+  font-size: 18px;
   margin-right: 2px;
 }

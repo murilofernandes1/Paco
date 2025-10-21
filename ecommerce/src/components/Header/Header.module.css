@@ -20,3 +20,14 @@
   color: #d4dbda;
   border-bottom: #d4dbda 1px solid;
 }
+.cartBadge {
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  background-color: #edf7f6;
+  color: #1b2d2a;
+  border-radius: 100%;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: bold;
+}

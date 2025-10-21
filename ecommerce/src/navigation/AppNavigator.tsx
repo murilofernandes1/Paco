@@ -7,6 +7,8 @@ import PublicRoutes from "./PublicRoutes";
 import AuthenticatedRoutes from "./AuthenticatedRoutes";
 import Account from "../screens/Account/Account";
 import Product from "../screens/Products/Product";
+import Checkout from "../screens/Checkout/Checkout";
+import Cart from "../screens/Cart/Cart";
 
 export default function AppNavigator() {
   return (
@@ -21,6 +23,8 @@ export default function AppNavigator() {
         <Route element={<AuthenticatedRoutes />}>
           <Route path="/account" element={<Account />} />
           <Route path="/product/:id" element={<Product />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/cart" element={<Cart />} />
         </Route>
       </Routes>
     </>
