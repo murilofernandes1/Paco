@@ -124,7 +124,7 @@
 
 .colorOption input:checked + .colorCircle {
   border-color: #1b2d2a;
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .sizeContainer {
@@ -289,4 +289,8 @@ button:hover,
   text-align: center;
   color: #555;
   margin-top: 20px;
+}
+.inputError {
+  color: red;
+  margin-top: 0;
 }

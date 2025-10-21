@@ -35,11 +35,16 @@ export default function Product() {
   const { addToCart } = useCart();
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
+  const [added, setAdded] = useState(false);
+  const [errorSize, setErrorSize] = useState(false);
+  const [errorColor, setErrorColor] = useState(false);
   const { id } = useParams<{ id: string }>();
   function handleAddToCart() {
-    if (!color || !size) {
-      alert("Escolha uma cor e um tamanho");
-      return;
+    if (!color) {
+      setErrorColor(true);
+    }
+    if (!size) {
+      setErrorSize(true);
     }
     addToCart({
       id: product.id,
@@ -49,12 +54,15 @@ export default function Product() {
       color,
       size,
     });
-
-    alert("Produto adicionado ao carrinho!");
+    setAdded(true);
   }
   function buyNow() {
-    if (!color || !size) {
-      alert("Escolha uma cor e um tamanho antes de continuar");
+    if (!color) {
+      setErrorColor(true);
+      return;
+    }
+    if (!size) {
+      setErrorSize(true);
       return;
     }
     navigate("/checkout");
@@ -173,6 +181,13 @@ export default function Product() {
                 ) : (
                   <div className={styles.color}>
                     <div className={styles.head}>Cores disponíveis</div>
+                    {errorColor === true ? (
+                      <p className={styles.inputError}>
+                        Selecione uma cor antes de continuar.
+                      </p>
+                    ) : (
+                      <div />
+                    )}
                     <div className={styles.colorOptionsRow}>
                       {stock.map((s) => (
                         <label key={s.id} className={styles.colorOption}>
@@ -197,6 +212,13 @@ export default function Product() {
                   </div>
                 )}
                 <div className={styles.head}>Tamanhos disponíveis</div>
+                {errorSize === true ? (
+                  <p className={styles.inputError}>
+                    Selecione um tamanho antes de continuar.
+                  </p>
+                ) : (
+                  <div />
+                )}
                 <div className={styles.sizeContainer}>
                   {stock.map((s) => (
                     <label key={s.id} className={styles.sizeOption}>
@@ -215,9 +237,15 @@ export default function Product() {
                 </div>
                 <div className={styles.buttonContainer}>
                   <button onClick={buyNow}>Comprar Agora</button>
-                  <button onClick={handleAddToCart}>
-                    Adicionar ao Carrinho
-                  </button>
+                  {added === false ? (
+                    <button onClick={handleAddToCart}>
+                      Adicionar ao Carrinho
+                    </button>
+                  ) : (
+                    <button onClick={handleAddToCart}>
+                      Adicionado com sucesso
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
