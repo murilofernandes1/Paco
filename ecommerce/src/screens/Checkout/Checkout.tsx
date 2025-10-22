@@ -1,7 +1,7 @@
 import { useCart } from "../../contexts/CartContext";
 import { formatBRL } from "../../utils/BRLConvert";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaCreditCard, FaQrcode, FaFileInvoice } from "react-icons/fa";
 import styles from "./Checkout.module.css";
 
@@ -19,16 +19,24 @@ export default function Checkout() {
   const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
   const [couponError, setCouponError] = useState(false);
+  const [pixDiscount, setPixDiscount] = useState(0);
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const totalWithDiscount = total - discount;
+
+  const totalWithDiscount = total - discount - pixDiscount;
 
   const paymentOptions = [
     { id: "credit", label: "Cartão de Crédito", icon: <FaCreditCard /> },
     { id: "pix", label: "Pix", icon: <FaQrcode /> },
     { id: "boleto", label: "Boleto", icon: <FaFileInvoice /> },
   ];
-
+  useEffect(() => {
+    if (paymentMethod === "pix") {
+      setPixDiscount(total * 0.05);
+    } else {
+      setPixDiscount(0);
+    }
+  }, [paymentMethod, total]);
   function handleFinalize() {
     if (cart.length === 0) {
       alert("Seu carrinho está vazio!");
@@ -43,11 +51,14 @@ export default function Checkout() {
       }
     }
 
-    alert(
-      `Compra finalizada com sucesso!\nForma de pagamento: ${paymentMethod}\nValor final: ${formatBRL(
-        totalWithDiscount
-      )}`
-    );
+    const appliedPixDiscount = paymentMethod === "pix" ? total * 0.05 : 0;
+
+    setPixDiscount(appliedPixDiscount);
+    //alert( ALERTA TEMPORARIO, SUBSTITUIR POR UM FEEDBACK AO USUÁRIO
+    //`Compra finalizada com sucesso!\nForma de pagamento: ${paymentMethod}\nValor final: ${formatBRL(
+    // totalWithDiscount
+    //)}`
+    //);
     clearCart();
     navigate("/");
   }
@@ -68,6 +79,7 @@ export default function Checkout() {
     }
   }
   const couponDiscount = discount;
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Checkout</h1>
@@ -106,6 +118,13 @@ export default function Checkout() {
                 {discount ? (
                   <span className={styles.newDiscount}>
                     -{formatBRL(couponDiscount)}
+                  </span>
+                ) : (
+                  <div />
+                )}
+                {pixDiscount ? (
+                  <span className={styles.newDiscount}>
+                    -{formatBRL(pixDiscount)}
                   </span>
                 ) : (
                   <div />
