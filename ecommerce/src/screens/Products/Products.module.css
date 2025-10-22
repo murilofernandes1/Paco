@@ -120,6 +120,7 @@
   font-weight: 500;
   color: #1b2d2a;
   transition: 0.2s ease;
+  margin-top: -20px;
 }
 
 .colorOption input:checked + .colorCircle {
@@ -156,6 +157,7 @@
   font-weight: 500;
   color: #1b2d2a;
   transition: 0.2s ease;
+  margin-top: -20px;
 }
 
 .sizeOption input:checked + .sizeSquare {
