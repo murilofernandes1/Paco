@@ -42,9 +42,11 @@ export default function Product() {
   function handleAddToCart() {
     if (!color) {
       setErrorColor(true);
+      return;
     }
     if (!size) {
       setErrorSize(true);
+      return;
     }
     addToCart({
       id: product.id,

@@ -218,7 +218,7 @@ export default function Checkout() {
               )}
             </div>
 
-            <button className={styles.button} onClick={handleFinalize}>
+            <button className={styles.buttonPay} onClick={handleFinalize}>
               Finalizar Compra
             </button>
           </div>

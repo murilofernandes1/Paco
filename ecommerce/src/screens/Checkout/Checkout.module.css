@@ -251,3 +251,7 @@ button:hover,
   opacity: 0.6;
   font-size: 1px;
 }
+.buttonPay {
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
